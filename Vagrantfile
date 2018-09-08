@@ -25,4 +25,8 @@ Vagrant.configure(VAGRANT_FILE_API_VERSION) do |config|
             vbox.cpus = "2"
         end
     end
+
+    config.vm.provision "ansible" do |ansible|
+        ansible.playbook = "prereq.yaml"
+    end
 end
