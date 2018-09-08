@@ -1,0 +1,31 @@
+---
+- hosts: all
+  gather_facts: false
+  become: yes
+  pre_tasks:
+  - name: Installaing python
+    raw: bash -c "test -e /usr/bin/python" || (apt update && apt install python -y)
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: Adding google key
+    apt_key:
+      url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+      state: present
+  - name: Adding kube repo
+    apt_repository:
+      repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+      filename: kube
+  - name: Installing packages
+    apt:
+      name: "{{item}}"
+      state: present
+    with_items:
+      - apt-transport-https
+      - docker.io
+      - kubeadm
+      - kubectl
+      - kubelet
+      - kubernetes-cni
