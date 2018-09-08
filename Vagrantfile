@@ -28,5 +28,6 @@ Vagrant.configure(VAGRANT_FILE_API_VERSION) do |config|
 
     config.vm.provision "ansible" do |ansible|
         ansible.playbook = "prereq.yaml"
+        ansible.limit = "all"
     end
 end
