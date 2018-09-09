@@ -16,11 +16,12 @@ spec:
   template:
     metadata:
       labels:
+        configMapVersion: v2.4
         app: player
     spec:
       containers:
         - name: player-service
-          image: sunbird/player:1.10.0-silver
+          image: sunbird/player:1.10.0-bronze
           ports:
             - containerPort: 3000
           envFrom:
