@@ -29,3 +29,23 @@
       - kubectl
       - kubelet
       - kubernetes-cni
+
+- hosts: master
+  tasks:
+  - name: Initializing master
+    shell: sudo kubeadm init
+  - name: changing the ownership
+    shell: |
+      mkdir -p $HOME/.kube
+      sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+      sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  - name: Initializing network
+    shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+  - name: Generating token
+    shell: kubeadm token create --print-join-command
+    register: token
+  - name: Registering nodes with master
+    become: yes
+    shell: "{{token.stdout}}"
+    delegate_to: "{{item}}"
+    loop: "{{groups['nodes']}}"
