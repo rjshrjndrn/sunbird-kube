@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: player-config
+  namespace: default
+data: 
+  sunbird_instance: "sunbird"
+  sunbird_port: "3000"
+  sunbird_content_player_url: "https://staging.open-sunbird.org/api/"
+  sunbird_learner_player_url: "https://staging.open-sunbird.org/api/"
+  sunbird_content_proxy_url: "http://content-service:5000"
+  sunbird_echo_api_url: "https://staging.open-sunbird.org/api/echo/"
+  sunbird_autocreate_trampoline_user: "false"
+  sunbird_portal_realm: "sunbird"
+  sunbird_portal_auth_server_url: "https://staging.open-sunbird.org/auth"
+  sunbird_portal_auth_server_client: "portal"
+  sunbird_trampoline_client_id: "trampoline"
+  sunbird_trampoline_secret: "36c4277f-d59b-4ea2-b788-964b96bd47d1"
+  ekstep_env: "qa"
+  sunbird_default_channel: "sunbird-staging"
+  sunbird_api_auth_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2NTU0NDQ5ZWI0MGQ0YTI4ODQ3YzAzYWZlNmJjMmEyOCJ9.YhnTaDw_xvf8Q5S66QiO71-5WeqLaTPv-vvNZSwBqLk"
+  sunbird_enable_permission_check: "1"
+  sunbird_cassandra_urls: "10.11.4.4:9042" 
+  sunbird_session_store_type: "cassandra"
+  sunbird_dataservice_url: "https://staging.open-sunbird.org/api/"
+  sunbird_telemetry_packet_size: "200"
+  sunbird_environment: "staging"
+  sunbird_android_app_url: "http://www.sunbird.org"
+  sunbird_portal_cdn_url: "https://staging-sunbird.azureedge.net/player/"
+  sunbird_portal_title_name: "Sunbird Staging"
+  sunbird_enable_signup: "true"
+  sunbird_tenant_cdn_url: "https://staging-sunbird.azureedge.net/tenants"
+  sunbird_cloud_storage_urls: "https://s3.ap-south-1.amazonaws.com/ekstep-public-qa/,https://ekstep-public-qa.s3-ap-south-1.amazonaws.com/,https://sunbirdstaging.blob.core.windows.net/sunbird-content-staging/"
+  sunbird_config_service_url: "https://staging.open-sunbird.org/api/config/"

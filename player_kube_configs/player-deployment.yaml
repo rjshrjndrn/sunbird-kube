@@ -1,0 +1,28 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: player-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: player
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: player
+    spec:
+      containers:
+        - name: player-service
+          image: sunbird/player:1.10.0-silver
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: player-config
