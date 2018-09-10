@@ -49,7 +49,7 @@
     become: yes
     shell: |
       route add 10.96.0.1 gw "{{master_ip}}" 
-      echo KUBELET_EXTRA_ARGS=--node-ip=$($(hostname -I) | awk '{print $2}') > /etc/default/kubelet
+      echo KUBELET_EXTRA_ARGS=--node-ip=$(hostname -I | awk '{print $2}') > /etc/default/kubelet
       systemctl daemon-reload
       systemctl restart kubelet.service
       sleep 2
