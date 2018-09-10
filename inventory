@@ -1,0 +1,11 @@
+[master]
+master ansible_host=13.126.250.36 ansible_user=ubuntu
+[node1]
+node1 ansible_host=13.233.9.174 ansible_user=ubuntu
+node1 ansible_host=13.233.9.175 ansible_user=ubuntu
+
+[nodes]
+node-[1:2]
+
+[master:vars]
+master_ip=192.168.11.10
