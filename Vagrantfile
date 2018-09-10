@@ -7,9 +7,7 @@ Vagrant.configure(VAGRANT_FILE_API_VERSION) do |config|
     config.vm.define "master" do |master|
         master.vm.box = "ubuntu/xenial64"
         master.vm.hostname = "master"
-        master.vm.network "private_network",
-            ip: "172.16.10.10",
-            netmask: "24"
+        master.vm.network "public_network"
         master.vm.provider "virtualbox" do |vbox|
             vbox.name = "master"
             vbox.memory = "3070"
@@ -21,9 +19,7 @@ Vagrant.configure(VAGRANT_FILE_API_VERSION) do |config|
         config.vm.define "node-#{i}" do |node|
             node.vm.box = "ubuntu/xenial64"
             node.vm.hostname = "node-#{i}"
-            node.vm.network "private_network",
-                ip: "172.16.10.2#{i}",
-                netmask: "24"
+            node.vm.network "public_network"
             node.vm.provider "virtualbox" do |vbox|
                 vbox.name = "node-#{i}"
                 vbox.memory = "2048"
