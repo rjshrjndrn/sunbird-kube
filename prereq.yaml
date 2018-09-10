@@ -33,7 +33,8 @@
 - hosts: master
   tasks:
   - name: Initializing master
-    shell: sudo kubeadm init
+    shell: "sudo kubeadm init --api-advertise-addresses={{master_ip}}"
+    ignore_errors: yes
   - name: changing the ownership
     shell: |
       mkdir -p $HOME/.kube
@@ -46,6 +47,12 @@
     register: token
   - name: Registering nodes with master
     become: yes
-    shell: "{{token.stdout}}"
+    shell: |
+      route add 10.96.0.1 gw "{{master_ip}}" 
+      echo KUBELET_EXTRA_ARGS=--node-ip=$($(hostname -I) | awk '{print $2}') > /etc/default/kubelet
+      systemctl daemon-reload
+      systemctl restart kubelet.service
+      sleep 2
+      "{{token.stdout}}" || true
     delegate_to: "{{item}}"
     loop: "{{groups['nodes']}}"
